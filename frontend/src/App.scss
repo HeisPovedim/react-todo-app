@@ -1,0 +1,77 @@
+.app {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__add-task {
+    &_input,
+    &_button {
+      box-shadow: 0px 0px 2px 2px rgba(34, 60, 80, 0.2);
+      border-radius: 24px;
+    }
+
+    &_input {
+      outline: none;
+    }
+
+    &_input::placeholder {
+      font-style: italic;
+    }
+
+    &_button {
+      font-weight: bold;
+      color: white;
+      background-color: #df5d50;
+    }
+  }
+
+  &__tasks {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 0px 2px 2px rgba(34, 60, 80, 0.2);
+
+    &_list {
+    }
+
+    &_status {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    &_status + label {
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        flex-shrink: 0;
+        flex-grow: 0;
+        border: 2px solid #df5d50;
+        border-radius: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+      }
+    }
+
+    &_status:checked + label::before {
+      border-color: #df5d50;
+      background-color: #df5d50;
+      background-image: url(./assets/images/checkbox.svg);
+      background-size: contain;
+    }
+
+    &_task {
+      background-color: #d2d7db;
+      border-radius: 12px;
+    }
+  }
+}
