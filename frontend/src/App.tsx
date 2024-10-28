@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import TodoList from "./components/ui/todolist/TodoList";
+import getRealTime from "./utils/get-real-time";
 
 import "./App.scss";
 
@@ -15,6 +16,19 @@ function App(): JSX.Element {
   const [items, setItems] = useState<Item[]>([]);
   const [task, setTask] = useState<string>("");
 
+  // GET CURRENT TIME
+  const [currentTime, setCurrentTime] = useState<string>(
+    new Date().toLocaleTimeString()
+  );
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // GET TODO LIST
   useEffect(() => {
     fetchItems();
   }, []);
@@ -50,6 +64,7 @@ function App(): JSX.Element {
 
   return (
     <div className="app">
+      <span className="text-white text-xl">{currentTime}</span>
       <h1 className="text-[2rem] text-[white] font-bold">To Do List 📜</h1>
       <div className="app__add-task mt-[28px] w-full flex justify-center gap-[24px]">
         <input
@@ -88,5 +103,4 @@ function App(): JSX.Element {
     </div>
   );
 }
-
 export default App;
